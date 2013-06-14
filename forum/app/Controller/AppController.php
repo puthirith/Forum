@@ -35,12 +35,12 @@ class AppController extends Controller {
 	public function beforeFilter(){
 		parent::beforeFilter();
 		
-		if($this->request->action !='login' && !$this->Session->check('User')){
+		/*if($this->request->action !='login' && !$this->Session->check('User')){
 			$this->Session->setFlash('Sorry you are accessing a private page, please login');
 			$this->redirect(array(
 				'controller'=>'users',
 				'action'=>'login'	
 			));
-		}
+		}*/
 	}
 }

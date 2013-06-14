@@ -13,10 +13,22 @@
 		
 		public function add(){
 			if($this->request->is('post')){
-				
+					
+				$this->User->create();
+	            if ($this->User->save($this->request->data)) {
+	                $this->Session->setFlash(('The user has been saved'));
+	                $this->redirect(array('controller'=>'users','action' => 'login'));
+	            } else {
+	                $this->Session->setFlash(('The user could not be saved. Please, try again.'));
+	            }
+			
+			/*
 				$this->User->save($this->request->data);
-				$this->redirect('/');
-				
+				$this->redirect(array(
+						'controller'=>'users',
+						'action'=>'login'
+					));
+			*/	
 			}
 		}
 		
@@ -37,11 +49,11 @@
 					$this->request->data('User.email'),
 					$this->request->data('User.password')			
 				);
-				debug($user);
+				//debug($user);
 				if($user){
 					$this->Session->write('User',$user);
 					$this->redirect(array(
-						'controller'=>'users',
+						'controller'=>'posts',
 						'action'=>'index'
 					));
 				}
