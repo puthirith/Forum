@@ -7,8 +7,10 @@ App::uses('Security','Utility');
 		public $displayField = 'email';
 		
 		public $hasMany=array(
-			'Post'
+			'Post','Comment'
 		);
+		
+		
 	
 		public $validate = array(
 			'firstname'=> array(

@@ -1,18 +1,31 @@
 <h2>Post </h2>
-<p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+<p><?php echo $this->Html->link('Add Post', array('controller'=>'posts','action' => 'add')); ?></p>
 <table>
     <tr>
         <th>Id</th>
+        <th>Poster</th>
         <th>Question</th>
         <th>Created</th>
     </tr>
     <!-- Here’s where we loop through our $posts array, printing out post info -->
+   
     <?php foreach ($posts as $post): ?>
+   
     <tr>
-    	<td><?php 
-    			echo $this->Html->link($post['Post']['user_id'],array('action'=>'index',$post['Post']['user_id'])); 
-    		
-    		?>
+    	<td>
+    		<?php 
+    			echo $this->Html->link($post['Post']['id'],array('action'=>'index',$post['Post']['user_id'])); 
+ 			?>
+    	</td>
+    	<td>
+    		<?php 
+    			$name=ucfirst($post['User']['lastname'])." ".ucfirst($post['User']['firstname']);
+    			echo $name;
+    			//$name = $this->User->findById($id);
+				//debug($name);
+    			//echo $this->Html->link($post['Post']['user_id'],array('action'=>'index',$post['Post']['user_id'])); 
+				//echo $name['User']['lastname'];
+ 			?>
     	</td>
     	
     	<td>

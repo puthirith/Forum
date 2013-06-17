@@ -1,9 +1,7 @@
-<?php 
-	class CommentsController extends AppController{
-		
-		public function index(){
-			$this->set('comments', $this->Comment->find('all'));
-		}
+<?php
+	class Comment extends AppModel{
+	
+		public $belongsTo = array('User','Post');
 		
 		public function getComment(){
 			
@@ -18,6 +16,6 @@
 			return $commentsbyid;
 			//$this->set('comments', $commentsbyid);
 		}
+		
 	}
-
 ?>

@@ -3,6 +3,7 @@
 		public function isOwnedBy($post, $user) {
     		return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
 		}
+		public $hasMany=array('Comment');
 		public $belongsTo=array(
 			'User'
 		);

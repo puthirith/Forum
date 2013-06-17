@@ -43,4 +43,18 @@ class AppController extends Controller {
 			));
 		}*/
 	}
+	
+	public function myCheckSession(){
+        if(!$this->Session->check('User')){
+             $this->redirect(array('controller' => 'users', 'action' => 'login'));
+        }
+    }
+    
+    public function checkSession(){
+        if(!$this->Session->check('User')){
+             return false;
+        }else{
+            return true;
+        }
+    }
 }
