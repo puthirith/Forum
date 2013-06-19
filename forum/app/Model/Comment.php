@@ -17,5 +17,15 @@
 			//$this->set('comments', $commentsbyid);
 		}
 		
+		public function add_comment ($cmt){
+			if ($this->Save($cmt)){
+				return true;
+			}else return false;
+		}
+		
+		public function get_comment($cid){
+			return $this->findById($cid);
+		}
+		
 	}
 ?>

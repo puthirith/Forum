@@ -40,7 +40,12 @@ $cakeDescription = __d('cake_dev', 'Forum');
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://ktech5.hn.ee'); ?></h1>
+			<div style=" width: 50%; float: left;">
+				<h1><?php echo $this->Html->link($cakeDescription, 'http://ktech5.hn.ee'); ?></h1>
+			</div>
+			<div style="width: 50%; float: right;">
+				<p align="right" style="padding-top: 10px;"><?php echo $this->Html->link("Log out",array('controller'=>'users','action'=>'logout')); ?></p>
+			</div>
 		</div>
 		<div id="content">
 

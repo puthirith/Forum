@@ -1,8 +1,7 @@
 <h2>Post </h2>
-<p><?php echo $this->Html->link('Add Post', array('controller'=>'posts','action' => 'add')); ?></p>
+<p id="addLink"><?php echo $this->Html->link('Add Post', array('controller'=>'posts','action' => 'add')); ?></p>
 <table>
     <tr>
-        <th>Id</th>
         <th>Poster</th>
         <th>Question</th>
         <th>Created</th>
@@ -11,13 +10,8 @@
    
     <?php foreach ($posts as $post): ?>
    
-    <tr>
-    	<td>
-    		<?php 
-    			echo $this->Html->link($post['Post']['id'],array('action'=>'index',$post['Post']['user_id'])); 
- 			?>
-    	</td>
-    	<td>
+    <tr bgcolor="#C4BDBD">
+    	<td width="15%">
     		<?php 
     			$name=ucfirst($post['User']['lastname'])." ".ucfirst($post['User']['firstname']);
     			echo $name;
@@ -28,7 +22,7 @@
  			?>
     	</td>
     	
-    	<td>
+    	<td width="65%">
     		<?php echo $this->Html->link($post['Post']['status'], array('action' => 'view', $post['Post']['id'])); ?> 
         </td>
     	<!--<td>
@@ -36,7 +30,7 @@
 			array('confirm' => 'Are you sure?'));?>
     		<?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?> 
      </td>-->
-        <td>
+        <td width="20%">
             <?php echo $post['Post']['created']; ?>
         </td>
     </tr>

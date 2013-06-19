@@ -61,5 +61,9 @@
 				$this->Session->setFlash('Email and password combination are not correct');
 			}
 		}
+		public function logout(){
+            $this->Session->destroy();
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 	}
 ?>
