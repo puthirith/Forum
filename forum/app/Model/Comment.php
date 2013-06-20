@@ -27,5 +27,9 @@
 			return $this->findById($cid);
 		}
 		
+		public function delete_comment($pid){
+			$sql ="DELETE * FROM comments WHERE post_id=". $pid;
+			return $this->query($sql);
+		}
 	}
 ?>

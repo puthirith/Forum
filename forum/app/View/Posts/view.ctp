@@ -1,6 +1,22 @@
-<h2><?php echo h($posts['Post']['status']); ?></h2>
-<p><small>Created: <?php echo $posts['Post']['created']; ?></small></p>
+<h2>Question: <?php echo h($posts['Post']['status']); ?></h2>
+<p><small>Created: <?php echo $posts['Post']['created']; ?> by <?php echo ucfirst($posts['User']['lastname'])." ".ucfirst($posts['User']['firstname']);?>	
+</small></p>
+
 <?php $obj_cmt= new Comment();$color="#9B9898";//pr(ClassRegistry::init('CommentsController')->getComment());exit(); ?>
+
+<p id="addLink">
+	<?php
+		$myUser = $this->Session->read('User');
+		if ($posts['Post']['user_id']==$myUser['User']['id']){
+			
+			echo $this->Form->postLink('Delete',array('action' => 'delete', $posts['Post']['id']),
+			array('confirm' => 'Are you sure?'));
+			echo "   ";
+			echo $this->Html->link('Edit', array('controller'=>'posts','action' => 'edit',$posts['Post']['id']));
+		}
+		
+	?>
+</p>
 <table>
 	<tr>
 		<th>User</th>

@@ -31,6 +31,28 @@
 			$this->set('posts', $this->Post->find('all'));
 		}
 		
+		public function edit($id = null){
+			if (!$id) {
+        	throw new NotFoundException(('Invalid post'));
+	        }
+	        $post = $this->Post->findById($id);
+	        if (!$post) {
+	        	throw new NotFoundException(('Invalid post'));
+	        }
+	        if ($this->request->is('post') || $this->request->is('put')) {
+	        	$this->Post->id = $id;
+	        	if ($this->Post->save($this->request->data)) {
+	        		$this->Session->setFlash('Your post has been updated.');
+	        		$this->redirect(array('action' => 'view',$id));
+	        	} else {
+	        		$this->Session->setFlash('Unable to update your post.');
+	        	}
+	        }
+	        if (!$this->request->data) {
+	        	$this->request->data = $post;
+	        }
+		}
+		
 		public function view($id=null){
 			if (!$id) {
 	            throw new NotFoundException(('Invalid post'));
@@ -63,7 +85,16 @@
 				$this->redirect("view/".$id);
 				//pr($comment);
 			}
-			
 		}
+		
+		public function delete($id) {
+	        if ($this->request->is('get')) {
+		        throw new MethodNotAllowedException();
+	        }
+	        if ($this->Post->delete($id,true)) {
+	            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
+	            $this->redirect(array('action' => 'index' ));
+	        }
+    	}
 	}
 ?>
