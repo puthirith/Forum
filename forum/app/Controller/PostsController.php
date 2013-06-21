@@ -5,15 +5,10 @@
 		
 		public function add(){
 			$myUser = $this->Session->read('User');
-			//$users = $this->Post->User->find('list');
 			
 			if($this->request->is('post')){
-				//pr($this->request->data());exit;
-				//$this->Post->save($this->request->data);	
 				$post["user_id"]= $myUser['User']['id'];
 				$post["status"]=$this->request->data['Comment']['status'];
-				//$post["status"]= $this->passedArgs['status'];
-				//$post["status"]= "hi";
 				$post["created"]=date("Y-m-d H:i:s");
 				$post["modified"]=date("Y-m-d H:i:s");
 				$this->Post->save($post);
@@ -69,7 +64,6 @@
 			
 			
 			if($this->request->is('post')){
-				//print_r($this->request->data); exit();
 				$comment["user_id"]=$myUser['User']['id'];
 				$comment["post_id"]=$id;
 				$comment["comment"]=$this->request->data['Comment']['comment'];
@@ -85,16 +79,32 @@
 				$this->redirect("view/".$id);
 				//pr($comment);
 			}
+			
+		}
+		public function delete_cmt($id,$pid){
+			if($this->Comment->delete_comment($id)){
+				 $this->Session->setFlash('The comment has been deleted.');	 
+				$this->redirect(array('action' => 'view' ,$pid));       	            
+	        }else{
+	        	$this->Session->setFlash('The comment is not deleted.');
+	        }
 		}
 		
 		public function delete($id) {
 	        if ($this->request->is('get')) {
 		        throw new MethodNotAllowedException();
 	        }
-	        if ($this->Post->delete($id,true)) {
+	        if ($this->Post->delete($id)) {
+	        	// foreach ($cmt as $cmts){
+	        		// $this->Comment->delete_comment($cmts['id']);
+	        	// }
 	            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
 	            $this->redirect(array('action' => 'index' ));
 	        }
     	}
+		
+		public function get_comment($id){
+			return $this->Comment->getComment($id);
+		}
 	}
 ?>

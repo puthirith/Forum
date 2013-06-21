@@ -5,37 +5,35 @@
 			$this->set('comments', $this->Comment->find('all'));
 		}
 		
-		public function getComment(){
-			
-			$comments=$this->Comment->find('all');
-			$commentsbyid;
-			
-			foreach ($comments as $comment){
-				if ($comment['post_id']=="1"){
-					$commentsbyid=$comment;
-				}
-			}
-			return $commentsbyid;
-			//$this->set('comments', $commentsbyid);
+		public function getComment($id){
+			return $this->Comment->findById($id);
 		}
 		
-		public function edit($id = null){
+		public function edit($id = null,$pid){
+			$myUser=$this->Session->read('User');
 			if (!$id) {
         	throw new NotFoundException(('Invalid post'));
 	        }
-	        $post = $this->Post->findById($id);
-	        if (!$post) {
+	        $comment = $this->Comment->findById($id);
+	        if (!$comment) {
 	        	throw new NotFoundException(('Invalid post'));
 	        }
 	        if ($this->request->is('post') || $this->request->is('put')) {
 	        	$this->Comment->id = $id;
-	        	if ($this->Post->save($this->request->data)) {
-	        		//$this->Session->setFlash('Your post has been updated.');
-	        		$this->redirect(array('action' => 'view',$id));
-	        	} 
+				$u_cmt['id']=$id;
+				$u_cmt['user_id']=$myUser['User']['id'];
+				$u_cmt['post_id']=$pid;
+				$u_cmt['comment']=$this->request->data['Comment']['status'];
+				//pr($u_cmt);exit();
+	        	if ($this->Comment->Save($u_cmt)) {
+	        		$this->Session->setFlash('Your comment has been updated.');
+	        		$this->redirect(array('controller'=>'posts','action' => 'view',$pid));
+	        	} else {
+	        		$this->Session->setFlash('Unable to update your comment.');
+	        	}
 	        }
 	        if (!$this->request->data) {
-	        	$this->request->data = $post;
+	        	$this->request->data = $comment;
 	        }
 		}
 	}
