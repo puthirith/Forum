@@ -9,8 +9,12 @@
 			}else return false;
 		}
 		
-		public function get_comment($cid){
-			return $this->findById($cid);
+		public function get_comment_post($pid){
+			
+			$arr = $this->find('all', array(
+				'conditions' => array('post_id'=>$pid)
+			));
+			return $arr;
 		}
 		
 		public function delete_comment($id) {
@@ -20,5 +24,7 @@
 	        	return false;
 	        }
     	}
+		
+		
 	}
 ?>

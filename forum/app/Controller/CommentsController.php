@@ -5,8 +5,14 @@
 			$this->set('comments', $this->Comment->find('all'));
 		}
 		
-		public function getComment($id){
-			return $this->Comment->findById($id);
+		public function view($id){
+			$this->set('cmt',$this->Comment->findById($id));
+			//return $this->Comment->findById($id);
+		}
+		
+		public function get_comment($id){
+			$this->set('cmt',$this->Comment->findById($id));
+			//return $this->Comment->findById($id);
 		}
 		
 		public function edit($id = null,$pid){

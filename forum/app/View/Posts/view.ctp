@@ -2,8 +2,6 @@
 <p><small>Created: <?php echo $posts['Post']['created']; ?> by <?php echo ucfirst($posts['User']['lastname'])." ".ucfirst($posts['User']['firstname']);?>	
 </small></p>
 
-<?php $obj_cmt= new Comment();$color="#9B9898";//pr(ClassRegistry::init('CommentsController')->getComment());exit(); ?>
-
 <p id="addLink">
 	<?php
 		$myUser = $this->Session->read('User');
@@ -24,14 +22,12 @@
 		<th>Action</th>
 		
 	</tr>
-	<?php foreach($posts['Comment'] as $comment): ?>
+	<?php $index=0;foreach($posts['Comment'] as $comment): ?>
 		<tr bgcolor="#9B9898">
-			<td width="15%"><?php //echo $comment['user_id']; 
-					//$cmt= $obj_cmt->get_comment($comment['user_id']);
-					echo $comment['user_id'];
-					//$cmt=$this->Post->get_comment($posts['Comment']['id']);
-					//pr($cmt); exit;
-					//echo ucfirst($cmt['User']['lastname'])." ".ucfirst($cmt['User']['firstname']);
+			<td width="15%"><?php 
+					$fname= ucfirst( $comments[$index]['User']['firstname']);
+					$lname= ucfirst( $comments[$index]['User']['lastname']);
+					echo $lname." ".$fname;
 				?></td>
 			<td width="55%"><?php echo $comment['comment']; ?></td>
 			<td width="20%"><?php echo $comment['created']; ?></td>
@@ -47,10 +43,10 @@
     			?>
 			</td>
 		</tr>
-	<?php endforeach; ?>
+	<?php $index=$index+1;endforeach; ?>
 </table>
 <?php
 	echo $this->Form->create();
-	echo $this->Form->input('comment');
+	echo $this->Form->input('cmt',array('label'=>' Comment: '));
 	echo $this->Form->end('Submit');
 ?>

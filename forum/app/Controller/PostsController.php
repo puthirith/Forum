@@ -49,6 +49,10 @@
 		}
 		
 		public function view($id=null){
+			
+			$comments = $this->Comment->get_comment_post($id);
+			//pr($comments);exit();
+			$this->set('comments', $comments);
 			if (!$id) {
 	            throw new NotFoundException(('Invalid post'));
 	        }
@@ -66,11 +70,9 @@
 			if($this->request->is('post')){
 				$comment["user_id"]=$myUser['User']['id'];
 				$comment["post_id"]=$id;
-				$comment["comment"]=$this->request->data['Comment']['comment'];
+				$comment["comment"]=$this->request->data['Comment']['cmt'];
 				$comment["created"]=date("Y-m-d H:i:s");
 				$comment["modified"]=date("Y-m-d H:i:s");
-				//pr($comment);
-				//$this->Comment->add_comment($comment);
 				if ($this->Comment->add_comment($comment)){
 					//$this->Session->setFlash("Comment posted");
 				}else {
@@ -94,7 +96,7 @@
 	        if ($this->request->is('get')) {
 		        throw new MethodNotAllowedException();
 	        }
-	        if ($this->Post->delete($id)) {
+	        if ($this->Post->delete($id,true)) {
 	        	// foreach ($cmt as $cmts){
 	        		// $this->Comment->delete_comment($cmts['id']);
 	        	// }
@@ -104,7 +106,9 @@
     	}
 		
 		public function get_comment($id){
-			return $this->Comment->getComment($id);
+			//return $this->Comment->get_comment($id);
+			$sql="SELECT u.firstname, u.lastname FROM users u INNER JOIN comments c ON u.id=c.user_id where c.id=23 ";
+			return ($this->Post->query($sql));
 		}
 	}
 ?>
