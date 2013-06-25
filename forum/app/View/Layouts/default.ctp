@@ -41,10 +41,15 @@ $cakeDescription = __d('cake_dev', 'Forum');
 	<div id="container">
 		<div id="header">
 			<div style=" width: 50%; float: left;">
-				<h1><?php echo $this->Html->link($cakeDescription, 'http://ktech5.hn.ee'); ?></h1>
+				<h1><?php echo $this->Html->link($cakeDescription, array('controller'=>'posts','action'=>'index')); ?></h1>
 			</div>
 			<div style="width: 50%; float: right;">
-				<p align="right" style="padding-top: 10px;"><?php echo $this->Html->link("Log out",array('controller'=>'users','action'=>'logout')); ?></p>
+				<p align="right" style="padding-top: 10px;">
+					Welcome, <b>
+					<?php $luser=$this->Session->read('User');
+						echo ucfirst($luser['User']['lastname'])." ".ucfirst($luser['User']['firstname']); ?></b>
+					<br/>
+					<?php echo $this->Html->link("Log out",array('controller'=>'users','action'=>'logout')); ?></p>
 			</div>
 		</div>
 		<div id="content">
@@ -60,7 +65,7 @@ $cakeDescription = __d('cake_dev', 'Forum');
 					array('target' => '_blank', 'escape' => false)
 				);*/
 			?>
-            <p align="center">Copyright©Thirith. All rights reserved.</p>
+            <p align="center">Copyright © Thirith. All rights reserved.</p>
 		</div>
 	</div>
 	

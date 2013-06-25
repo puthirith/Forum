@@ -49,7 +49,7 @@ $cakeDescription = __d('cake_dev', 'Forum');
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-            <p align="center">Copyright©Thirith. All rights reserved.</p>
+            <p align="center">Copyright © Thirith. All rights reserved.</p>
 		</div>
 	</div>
 	

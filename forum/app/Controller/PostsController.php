@@ -23,7 +23,7 @@
 		}
 		
 		public function index(){
-			$this->set('posts', $this->Post->find('all'));
+			$this->set('posts', $this->Post->find('all',array('order'=>array('Post.created'=>'desc'))));
 		}
 		
 		public function edit($id = null){
@@ -105,10 +105,6 @@
 	        }
     	}
 		
-		public function get_comment($id){
-			//return $this->Comment->get_comment($id);
-			$sql="SELECT u.firstname, u.lastname FROM users u INNER JOIN comments c ON u.id=c.user_id where c.id=23 ";
-			return ($this->Post->query($sql));
-		}
+
 	}
 ?>

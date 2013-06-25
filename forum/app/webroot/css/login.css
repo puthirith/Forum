@@ -81,6 +81,7 @@ p {
 
 #header{
 	padding: 10px 120px;
+
 }
 #header h1 {
 	line-height:50px;
@@ -100,12 +101,13 @@ p {
 	/*text-decoration: underline;*/
 }
 #content{
+	width:100%;
 	background: #fff;
 	clear: both;
 	color: #333;
 	padding: 10px 20px 40px 20px;
 	overflow: auto;
-	margin:0 auto;
+	padding-left:30%;
 }
 #footer {
 	clear: both;
